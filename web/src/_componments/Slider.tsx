@@ -41,7 +41,6 @@ export const Slider = ({
                   width={1920}
                   height={1080}
                   priority
-                  style={{ height: 'auto' }}
                 />
               </CarouselItem>
             );

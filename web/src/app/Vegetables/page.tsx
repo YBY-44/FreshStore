@@ -5,10 +5,10 @@ import { Category, ProductType, BannerType, SliderType } from '../../types';
 import { ProductListComp } from '@/_componments/ProductListComp';
 import { CategoryBanner } from '@/_componments/CategoryBanner';
 import { CategoryListComp } from '@/_componments/CategoryListComp';
-import { get } from 'http';
-import { set } from 'react-hook-form';
+import { useSearch } from '../../_context/SearchContext';
 export default function Home() {
   const curPage = 'Vegetables';
+  const { search } = useSearch();
   const [ProductList, setProductList] = useState<ProductType[]>([]);
   const [CategoryList, setCategoryList] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function Home() {
       });
   };
   const GetProductList = () => {
-    GlobalAPI.getProductsByCategory(curPage)
+    GlobalAPI.getProductsByCategory(curPage, search || '')
       .then((resp) => {
         console.log('product: ', resp.data.data);
         setProductList(resp.data.data);
@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     GetProductList();
     getCategoryList();
-  }, []);
+  }, [search]);
   return (
     <div className='flex flex-col w-full'>
       <CategoryBanner text={curPage} />

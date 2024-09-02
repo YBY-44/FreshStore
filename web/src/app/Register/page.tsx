@@ -4,17 +4,16 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
-import {
-  schemaRegist,
-  FormTypePickRegist,
-  PickRegist,
-} from '../../_forms/RegistForm';
+import { PickRegist } from '../../_forms/RegistForm';
+import { useEffect } from 'react';
 import { registerType } from '@/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, useForm } from 'react-hook-form';
 import GlobalAPI from '@/_utils/GlobalAPI';
 import { toast } from '../../_utils/Toast';
-export default function Home() {
+import { useRouter } from 'next/navigation';
+import { Loader } from 'lucide-react';
+import { useAuth } from '../../_componments/AuthProvider';
+export default function Page() {
+  const { isLogin, login, logout } = useAuth();
   const {
     register,
     handleSubmit,
@@ -23,16 +22,17 @@ export default function Home() {
     watch,
     formState: { errors },
   } = PickRegist();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const { Username, Email, Password } = watch();
   const onCreateAccount = (data: registerType) => {
     GlobalAPI.register(data)
       .then((resp) => {
         if (resp.data) {
-          console.log(resp.data.user);
-          console.log(resp.data.jwt);
+          setLoading(true);
+          login(resp.data.jwt, resp.data.user);
+          router.push('/');
+          toast.success('Welcome to FreshSolder ' + resp.data.user.username);
         }
-        setLoading(true);
       })
       .catch((error) => {
         const message = error.response.data.error.message;
@@ -40,21 +40,25 @@ export default function Home() {
           console.log(message);
           toast.error(message);
         } else {
-          // 处理其他类型的错误
-          alert('Unexpected error:' + error);
+          toast.error('Network Error, try again.');
         }
+        setLoading(false);
       });
   };
+  useEffect(() => {
+    if (isLogin) {
+      router.push('/');
+    }
+  });
   return (
     <div className='flex items-baseline justify-center mt-10 mb-5'>
       <div className='flex flex-col items-center justify-center p-10 bg-slate-100 border border-gray-200'>
         <Image
-          className='h-[120px] w-[120px]'
+          className='h-[200px] w-[200px]'
           src={'/LOGO.png'}
           alt='FreshSolder'
           width={200}
           height={200}
-          style={{ height: 'auto' }}
           priority
         />
         <h2 className='text-3xl font-bold my-4'>Create an Account</h2>
@@ -96,11 +100,11 @@ export default function Home() {
             disabled={loading}
             className='bg-green-700 hover:bg-green-800'
           >
-            Create an Account
+            {loading ? <Loader className='w-5 h-5 animate-spin' /> : 'Create an Account'}
           </Button>
           <p>
             Already have an Account{' '}
-            <Link href='/login' className='text-blue-500 underline'>
+            <Link href='/Login' className='text-blue-500 underline'>
               Click here
             </Link>{' '}
             to login

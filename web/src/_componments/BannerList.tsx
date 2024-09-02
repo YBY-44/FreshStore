@@ -60,7 +60,6 @@ export const Banner = () => {
                   width={1920}
                   height={1080}
                   priority
-                  style={{ height: 'auto', width: 'auto' }}
                 />
               </CarouselItem>
             );

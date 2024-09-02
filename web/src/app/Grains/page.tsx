@@ -5,8 +5,11 @@ import { Category, ProductType, BannerType, SliderType } from '../../types';
 import { ProductListComp } from '@/_componments/ProductListComp';
 import { CategoryBanner } from '@/_componments/CategoryBanner';
 import { CategoryListComp } from '@/_componments/CategoryListComp';
+import { useSearch } from '../../_context/SearchContext';
+
 export default function Home() {
   const curPage = 'Grains';
+  const { search } = useSearch();
   const [ProductList, setProductList] = useState<ProductType[]>([]);
   const [CategoryList, setCategoryList] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +29,7 @@ export default function Home() {
       });
   };
   const GetProductList = () => {
-    GlobalAPI.getProductsByCategory(curPage)
+    GlobalAPI.getProductsByCategory(curPage, search || '')
       .then((resp) => {
         setProductList(resp.data.data);
         setLoading(false);
@@ -41,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     GetProductList();
     getCategoryList();
-  }, []);
+  }, [search]);
   return (
     <div className='flex flex-col w-full'>
       <CategoryBanner text={curPage} />

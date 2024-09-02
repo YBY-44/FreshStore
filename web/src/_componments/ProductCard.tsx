@@ -22,7 +22,6 @@ export const ProductCard = ({
         alt={product.attributes.name || ''}
         width={500}
         height={200}
-        style={{ height: 'auto' }}
         priority
       />
       <h2 className='text-lg p-0 m-0'>{product.attributes.name}</h2>
@@ -37,8 +36,6 @@ export const ProductCard = ({
         <h2 className='text-sm p-0 m-0'>{product.attributes.QT}</h2>
       </div>
       <ProductOne product={product}/>
-
-
     </div>
   );
 };

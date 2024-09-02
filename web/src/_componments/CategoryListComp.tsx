@@ -55,9 +55,8 @@ export const CategoryListComp = ({
                   }
                   className='mb-1 rounded-t-md w-full h-20 object-cover shadow-sm cursor-pointer '
                   alt={category.attributes.name || ''}
-                  width={100}
-                  height={50}
-                  style={{ height: 'auto' }}
+                  width={500}
+                  height={500}
                   priority
                 />
                 <div className='my-2 flex justify-center text-ellipsis text-nowrap '>

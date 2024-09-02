@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "CostumerName": {
+      "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "OrderAddress": {
+      "type": "text"
+    },
+    "CostumerEmail": {
+      "type": "email"
+    },
+    "Duration": {
+      "type": "enumeration",
+      "enum": [
+        "O",
+        "M",
+        "A",
+        "N"
+      ]
+    },
+    "Phone": {
+      "type": "string"
+    },
+    "Postcode": {
+      "type": "string"
+    },
+    "TotalPrice": {
+      "type": "float"
+    },
+    "ExpectDay": {
+      "type": "string"
+    },
+    "OrderItemList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "ordered-item.order-item"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Unpaid",
+        "Ordered",
+        "Delivering",
+        "Delivered",
+        "Finished",
+        "Cancelled"
+      ]
+    },
+    "UserId": {
+      "type": "biginteger"
+    },
+    "DeliveryPrice": {
+      "type": "float"
+    },
+    "GST": {
+      "type": "float"
+    },
+    "Subtotal": {
+      "type": "float"
+    },
+    "CancelTime": {
+      "type": "string"
+    },
+    "DeliveryTime": {
+      "type": "string"
+    },
+    "PickedTime": {
+      "type": "string"
+    },
+    "PaidTime": {
+      "type": "string"
+    }
+  }
+}

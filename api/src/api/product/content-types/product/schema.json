@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "describtion": {
+      "type": "text"
+    },
+    "Price": {
+      "type": "decimal"
+    },
+    "mrp": {
+      "type": "decimal"
+    },
+    "PID": {
+      "type": "uid"
+    },
+    "Images": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "QT": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "user_carts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-cart.user-cart",
+      "mappedBy": "product"
+    }
+  }
+}
