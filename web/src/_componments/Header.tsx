@@ -353,7 +353,7 @@ export const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Link href='/Login'>
+          <Link href='/login'>
             <Button
               variant='default'
               className='w-[60px] flex items-center justify-center bg-green-800 hover:bg-green-800 text-sm rounded-lg'
