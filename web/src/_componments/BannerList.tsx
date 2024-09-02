@@ -19,12 +19,10 @@ export const Banner = () => {
   const GetBannerAndSliderList = () => {
     GlobalAPI.getSliders()
       .then((resp) => {
-        const res=resp.data.data;
-        const bannerList = res.filter(
-          ( banner : BannerType ) => {
-            return banner.attributes.Type === 'Banner';
-          }
-        );
+        const res = resp.data.data;
+        const bannerList = res.filter((banner: BannerType) => {
+          return banner.attributes.Type === 'Banner';
+        });
         setBannerList(bannerList);
         return resp.data.data;
       })
@@ -42,14 +40,16 @@ export const Banner = () => {
         className='bg-green-600 p-3 m-3 mt-2
       rounded-md text-green-100'
       >
-        We Offer 24/7 security delivery to all location, Order Any time, we asure you the best service.
+        We Offer 24/7 security delivery to all location, Order Any time, we
+        asure you the best service.
       </h2>
       <Carousel>
         <CarouselContent>
           {BannerList?.map((Banner) => {
+            console.log('imageUrl: ', Banner);
             const imageUrl =
-              process.env.NEXT_PUBLIC_ICON_URL +
                 Banner.attributes.Image?.data?.attributes?.url || '';
+
             return (
               <CarouselItem key={Banner.id}>
                 <Image

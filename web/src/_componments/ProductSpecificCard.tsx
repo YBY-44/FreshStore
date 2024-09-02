@@ -65,7 +65,6 @@ export const ProductSpecificCard = ({ product }: { product: ProductType }) => {
     );
   }, [amount, product.attributes.Price, product.attributes.mrp]);
   const imageUrl =
-    process.env.NEXT_PUBLIC_ICON_URL +
       product.attributes.Images?.data[0]?.attributes?.url || '';
 
   const BuySubmit = async () => {

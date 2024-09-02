@@ -95,6 +95,7 @@ export const Header = () => {
   const categoryList = () => {
     GlobalAPI.getCategory()
       .then((resp) => {
+        console.log(resp.data.data);
         setCategoryList(resp.data.data);
         return resp.data.data;
       })
@@ -156,8 +157,7 @@ export const Header = () => {
             <DropdownMenuSeparator />
             {CategoryList?.map((category) => {
               const imageUrl =
-                process.env.NEXT_PUBLIC_ICON_URL +
-                  category.attributes.icon?.data[0]?.attributes?.url || '';
+                category.attributes.icon?.data[0]?.attributes?.url || '';
               const resultname = category.attributes.name
                 .split(' ')
                 .join('')
@@ -229,7 +229,6 @@ export const Header = () => {
               {CartInfo?.map((Cart: CartItem, index) => {
                 console.log(Cart.attributes);
                 const imageUrl =
-                  process.env.NEXT_PUBLIC_ICON_URL +
                     Cart.attributes.product.data.attributes.Images.data[0]
                       .attributes.url || '';
                 const { name, Price, mrp, QT } =

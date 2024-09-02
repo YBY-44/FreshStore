@@ -38,8 +38,8 @@ export const ProductListComp = ({
       )}
       <div className='p-5 grid grid-cols-none sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8'>
         {ProductList?.map((product, index) => {
+          console.log('imageUrl: ', product);
           const imageUrl =
-            process.env.NEXT_PUBLIC_ICON_URL +
               product.attributes.Images?.data[0]?.attributes?.url || '';
           return (
             <ProductCard key={index} product={product} imageUrl={imageUrl} />

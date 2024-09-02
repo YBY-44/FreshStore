@@ -50,7 +50,6 @@ export const CategoryListComp = ({
               >
                 <Image
                   src={
-                    process.env.NEXT_PUBLIC_ICON_URL +
                       category.attributes.icon.data[0].attributes.url || ''
                   }
                   className='mb-1 rounded-t-md w-full h-20 object-cover shadow-sm cursor-pointer '

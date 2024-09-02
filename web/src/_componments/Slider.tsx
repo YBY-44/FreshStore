@@ -29,7 +29,6 @@ export const Slider = ({
         <CarouselContent>
           {SliderList?.map((slider) => {
             const imageUrl =
-              process.env.NEXT_PUBLIC_ICON_URL +
                 slider.attributes.Image?.data?.attributes?.url || '';
             return (
               <CarouselItem key={slider.id}>
