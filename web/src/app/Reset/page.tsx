@@ -49,7 +49,7 @@ export default function Page() {
         })
           .then((resp) => {
             if (resp.data) {
-              route.push('/Login');
+              route.push('/login');
               toast.success('Password reset successfully.');
               setLoading(false);
             }

@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         path: '/',
     });
     setIsLogin(false);
-    router.push('/Login');
+    router.push('/login');
   };
 
   return (

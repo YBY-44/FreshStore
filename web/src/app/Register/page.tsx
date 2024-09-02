@@ -104,7 +104,7 @@ export default function Page() {
           </Button>
           <p>
             Already have an Account{' '}
-            <Link href='/Login' className='text-blue-500 underline'>
+            <Link href='/login' className='text-blue-500 underline'>
               Click here
             </Link>{' '}
             to login
