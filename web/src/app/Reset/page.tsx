@@ -3,15 +3,11 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { parse } from 'path';
-import { parseCookies } from 'nookies';
 import { Input } from '../../components/ui/input';
 import GlobalAPI from '@/_utils/GlobalAPI';
 import { toast } from 'react-toastify';
 import { PickRepeat } from '../../_forms/ResetPassword';
-import { error } from 'console';
 import { Loader } from 'lucide-react';
-import { set } from 'lodash';
 export default function Page() {
   const {
     handleSubmit,
@@ -28,12 +24,12 @@ export default function Page() {
   useEffect(() => {
     console.log('Code:', code);
     setCode(code || '');
-  }, []);
+  }, [code]);
 
   return (
     <form
       className='mx-[10%] my-10 p-10 border-2 border-gray-300 rounded-lg  w-[80%] flex flex-col gap-10 justify-center'
-      onSubmit={handleSubmit(async () => {
+      onSubmit={handleSubmit(() => {
         setLoading(true);
         if (!code) {
           toast.error('No premission to reset password.');
@@ -45,7 +41,7 @@ export default function Page() {
           setLoading(false);
           return;
         }
-        await GlobalAPI.ResetPassword({
+        GlobalAPI.ResetPassword({
           code: Code,
           password: Password,
           passwordConfirmation: RepeatPassword,
