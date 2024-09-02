@@ -82,7 +82,8 @@ const addToCart = async (data: CardType, jwt: string) => {
 };
 
 const deleteToCart = async (id: number, jwt: string) => {
-  return await axios.delete(`/user-carts/${id}`, {
+  console.log('id: ', id);
+  return await axiosClient.delete(`/user-carts/${id}`, {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },

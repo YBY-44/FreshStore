@@ -31,6 +31,7 @@ export const createBookingSession = async (
   },
   jwt: string
 ) => {
+  console.log('createBookingSession:', totalPriceObject);
   try {
     // Call your backend to create a payment session
     await GlobalAPI.MakePayment(

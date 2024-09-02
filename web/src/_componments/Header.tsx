@@ -53,6 +53,7 @@ export const deleteFromCart = (
       if (setLoadin) setLoadin(false);
     })
     .catch((err) => {
+      console.log(err);
       toast.error('Error in deleting item from cart, please refresh');
       if (setLoadin) setLoadin(false);
     });
