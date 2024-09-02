@@ -2,7 +2,7 @@
 const nextConfig = {
     images:{
         remotePatterns:[
-            {hostname: 'localhost'},
+            {hostname: 'freshstore-production.up.railway.app'},
             {hostname: 'res.cloudinary.com'}
         ]
     }
