@@ -18,20 +18,21 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const { Password, RepeatPassword } = watch();
   const [Code, setCode] = useState('');
-  const urlParams = new URLSearchParams(window.location.search);
-  const code = urlParams.get('code'); // 获取 'code' 参数
   const route = useRouter();
   useEffect(() => {
-    console.log('Code:', code);
-    setCode(code || '');
-  }, [code]);
+    // This code will only run on the client
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      setCode(urlParams.get('code') || '');
+    }
+  }, []);
 
   return (
     <form
       className='mx-[10%] my-10 p-10 border-2 border-gray-300 rounded-lg  w-[80%] flex flex-col gap-10 justify-center'
       onSubmit={handleSubmit(() => {
         setLoading(true);
-        if (!code) {
+        if (!Code) {
           toast.error('No premission to reset password.');
           setLoading(false);
           return;

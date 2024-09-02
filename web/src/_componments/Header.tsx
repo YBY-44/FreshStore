@@ -68,7 +68,6 @@ export const Header = () => {
   const { isLogin, logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
-  // const isCheckout = window.location.pathname === '/Checkout';
   const [isCheckout, setIsCheckout] = useState(false);
   useEffect(() => {
     setIsCheckout(pathname === '/Checkout');
