@@ -146,9 +146,7 @@ export const OrderCard = ({
           <div className='pt-3'></div>
           {orderInfo.OrderItemList.map((item) => {
             console.log(item.product.Images[0].url);
-            const image =
-              process.env.NEXT_PUBLIC_ICON_URL + item.product.Images[0].url ||
-              '';
+            const image = item.product.Images[0].url || '';
             return (
               <div
                 key={item.id}
@@ -276,19 +274,18 @@ export const OrderCard = ({
 
           <div className='w-full gap-5 flex flex-col border-t pt-3'>
             <div className='w-full'>
-              {status === 'Unpaid' &&
-                (
-                  <Button
-                    className='bg-green-600 hover:bg-green-700'
-                    onClick={PayOrder}
-                  >
-                    {onAction ? (
+              {status === 'Unpaid' && (
+                <Button
+                  className='bg-green-600 hover:bg-green-700'
+                  onClick={PayOrder}
+                >
+                  {onAction ? (
                     <Loader className='h-5 w-5 animate-spin' />
                   ) : (
                     'Pay Now'
                   )}
-                  </Button>
-                )}
+                </Button>
+              )}
               {status === 'Delivered' && (
                 <Button
                   className='bg-green-600 hover:bg-green-700 w-full'
