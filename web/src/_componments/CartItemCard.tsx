@@ -23,7 +23,6 @@ export const CartItemCard = ({
 }) => {
   const { jwt } = parseCookies();
   const imageUrl =
-    process.env.NEXT_PUBLIC_ICON_URL +
       item.attributes.product.data.attributes.Images.data[0].attributes.url ||
     '';
   const { name, Price, mrp, QT } = item.attributes.product.data.attributes;
