@@ -75,6 +75,7 @@ export const ForgetPwd = () => {
             {isSend ? 'Please check your email and click the link to reset your password.':'We will send you a Link to reset your password, via registed email.'}
           </DialogDescription>
         </DialogHeader>
+        <h2 className='text-sm'>{'Only support "@163.com" currently'}</h2>
         <form className='w-full flex flex-col gap-5 ' onSubmit={() => {}}>
           <div className='flex gap-2'>
             <Input
