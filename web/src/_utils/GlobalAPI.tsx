@@ -29,10 +29,13 @@ const editProfile = async (
   data: { username: string; email: string },
   id: number
 ) => {
+  console.log('data: ', data);
   return await axiosClient.put(
     `/users/${id} `,
     {
-      data,
+
+        username: data.username,
+        email: data.email,
     },
     {
       headers: {

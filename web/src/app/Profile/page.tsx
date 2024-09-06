@@ -81,6 +81,7 @@ export default function Page() {
             toast.error('Please login to view profile');
             return;
           }
+          console.log('getValues: ', name, email);
           setEditIng(true);
           await GlobalAPI.editProfile(
             jwt,
@@ -114,14 +115,14 @@ export default function Page() {
           type='text'
           error={errors.name?.message}
           disabled={!edit}
-          {...register('email')}
+          {...register('name')}
         />
         <InputComponent
           label='Email'
           type='text'
           error={errors.email?.message}
           disabled={!edit}
-          {...register('name')}
+          {...register('email')}
         />
         <div className='flex justify-between px-3'>
           <h2>Status</h2>

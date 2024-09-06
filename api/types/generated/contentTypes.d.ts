@@ -881,42 +881,6 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   };
 }
 
-export interface ApiOrderProductOrderProduct extends Schema.CollectionType {
-  collectionName: 'order_products';
-  info: {
-    singularName: 'order-product';
-    pluralName: 'order-products';
-    displayName: 'OrderProduct';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    product: Attribute.Relation<
-      'api::order-product.order-product',
-      'oneToOne',
-      'api::product.product'
-    >;
-    amount: Attribute.Integer;
-    TotalPrice: Attribute.Float;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::order-product.order-product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::order-product.order-product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -1058,7 +1022,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
       'api::order.order': ApiOrderOrder;
-      'api::order-product.order-product': ApiOrderProductOrderProduct;
       'api::product.product': ApiProductProduct;
       'api::slider.slider': ApiSliderSlider;
       'api::user-cart.user-cart': ApiUserCartUserCart;
