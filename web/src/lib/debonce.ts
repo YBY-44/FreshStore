@@ -14,8 +14,8 @@ export const useDebounce = <T>(value: T, delay = 1000): T => {
   return debouncedValue;
 };
 
-export const useSearchLocation = () => {
-  const [searchText, setsearchText] = useState('');
+export const useSearchLocation = (SearchText?: string) => {
+  const [searchText, setsearchText] = useState(SearchText || '');
   const [loading, setLoading] = useState(false);
   const [LocationInfo, setLocationInfo] = useState<LocationInfo[]>(() => {
     return [];

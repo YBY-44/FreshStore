@@ -5,14 +5,15 @@ import { toast } from 'react-toastify';
 import GlobalAPI from '../../_utils/GlobalAPI';
 import Link from 'next/link';
 import { parseCookies } from 'nookies';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Loader } from 'lucide-react';
 import moment from 'moment';
+import { set } from 'lodash';
 const Page = () => {
   const router = useRouter();
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [orderId, setOrderId] = useState<string | null>(null);
   const { user, jwt } = parseCookies();
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     // This code will only run on the client
     if (typeof window !== 'undefined') {
@@ -30,31 +31,43 @@ const Page = () => {
       })
         .then(() => {
           toast.success('Payment Success, Order is preparing.');
+          setLoading(false);
         })
         .catch((error) => {
           console.error('Error updating order status:', error);
+          setLoading(false);
         });
     }
+    setLoading(false);
   }, [orderId, jwt]);
 
   return (
-    <div className='flex justify-center my-20'>
-      <div className='border shadow-md flex flex-col justify-center px-32 p-20 rounded-md items-center'>
-        <CheckCircle className='text-primary h-24 w-24' />
-        <h2 className='font-medium text-3xl text-primary'>
-          Payment Successful
-        </h2>
-        <h2 className='text-xl p-5'>
-          Thank you so much for your order, We are preparing your order.
-        </h2>
-        <div className='mt-20 flex gap-3 items-end'>
-        <h2 className='text-lg'>You can</h2>
-          <Link href='/MyOrder' className='text-blue-800 underline text-2xl'>
-            Click here{''}
-          </Link>
-          <h2 className='text-lg'>to track your order.</h2>
+    <div>
+      {loading? (
+        <div>
+          <Loader className='w-10 h-10 animate-spin'/>
         </div>
-      </div>
+      ):(
+          <div className='flex justify-center my-20'>
+            <div className='border shadow-md flex flex-col justify-center px-32 p-20 rounded-md items-center'>
+              <CheckCircle className='text-primary h-24 w-24' />
+              <h2 className='font-medium text-3xl text-primary'>
+                Payment Successful
+              </h2>
+              <h2 className='text-xl p-5'>
+                Thank you so much for your order, We are preparing your order.
+              </h2>
+              <div className='mt-20 flex gap-3 items-end'>
+                <h2 className='text-lg'>You can</h2>
+                <Link href='/MyOrder' className='text-blue-800 underline text-2xl'>
+                  Click here{''}
+                </Link>
+                <h2 className='text-lg'>to track your order.</h2>
+              </div>
+            </div>
+          </div>
+
+      )}
     </div>
   );
 };

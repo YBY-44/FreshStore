@@ -130,6 +130,30 @@ const AddOrder = async (data: OrderType, jwt: string) => {
     }
   );
 };
+const OrderDetailChange = async (
+  id: number,
+  jwt: string,
+  data: {
+    CostumerName: string;
+    CostumerEmail: string;
+    OrderAddress: string;
+    Phone: string;
+    ExpectDay: string;
+    Duration: string;
+  }
+) => {
+  return axiosClient.put(
+    `/orders/${id}`,
+    {
+      data,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    }
+  );
+};
 const OrderStatusChange = async (
   id: number,
   jwt: string,
@@ -157,7 +181,11 @@ const MakePayment = async (
   data: { amount: number; orderId: number },
   jwt: string
 ) => {
-  return axiosClient.post('/orders/create-payment-session', data, {
+  console.log('api: ', data.amount);
+  return axiosClient.post('/orders/create-payment-session', {
+    amount: Math.round(data.amount * 100),
+    orderId: data.orderId,
+  }, {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
@@ -233,7 +261,8 @@ const GlobalAPI = {
   getProfile,
   editProfile,
   sendEmail,
-  ResetPassword
+  ResetPassword,
+  OrderDetailChange
 };
 
 export default GlobalAPI;

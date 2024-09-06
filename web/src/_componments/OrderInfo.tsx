@@ -56,6 +56,9 @@ export const createBookingSession = async (
           .redirectToCheckout({
             sessionId,
           })
+          .then((result) => {
+            console.log('Stripe checkout result:', result);
+          })
           .catch((error) => {
             console.error('Stripe checkout error:', error);
           });
@@ -83,6 +86,7 @@ export const OrderInfo = ({
 }) => {
   const [ordering, setOrdering] = useState(false);
   const { user, jwt } = parseCookies();
+
   const {
     register,
     control,
@@ -92,6 +96,7 @@ export const OrderInfo = ({
     watch,
     formState: { errors },
   } = PickDetail();
+
   const {
     loading: l2,
     setLoading,
@@ -115,10 +120,11 @@ export const OrderInfo = ({
         status: 'Unpaid',
         UserId: JSON.parse(user).id,
         products: products.map((item: CartItem) => {
+          console.log('item:', item);
           return {
             product: item.attributes.product.data.id,
             quantity: item.attributes.quantity,
-            TotalPrice: item.attributes.amount * item.attributes.quantity,
+            TotalPrice: item.attributes.amount,
           };
         }),
         GST: (delivery + price) * 0.1,
@@ -139,6 +145,10 @@ export const OrderInfo = ({
       ),
       orderId: orderResponse.data.data.id,
     };
+    await createBookingSession(totalPriceObject, jwt).then((result) => {
+      toast.success('Payment Success, Order is preparing.');
+      setOrdering(false);
+    });
     const deleteCart = products.map(async (item: CartItem) => {
       await GlobalAPI.deleteToCart(item.id, jwt);
     });
@@ -147,16 +157,12 @@ export const OrderInfo = ({
       setOrdering(false);
       throw new Error('Delete cart failed');
     }
-    await createBookingSession(totalPriceObject, jwt).then((result) => {
-      toast.success('Payment Success, Order is preparing.');
-      setOrdering(false);
-    });
   };
   const [delivery, setDelivery] = useState(0);
   return (
     <form
       className='flex flex-col md:flex-row md:items-between gap-3'
-      onSubmit={handleSubmit(onOrderSubmit)} // 简化处理
+      onSubmit={handleSubmit(onOrderSubmit)}
     >
       <div className='md:w-[60%] flex flex-col justify-around'>
         <h1 className='text-2xl font-bold'>Order Details</h1>

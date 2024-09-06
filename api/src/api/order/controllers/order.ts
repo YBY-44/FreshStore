@@ -66,7 +66,7 @@ export default factories.createCoreController(
                   product_data: {
                     name: 'Order Payment',
                   },
-                  unit_amount: amount * 100, // amount in cents
+                  unit_amount: amount, // amount in cents
                 },
                 quantity: 1,
               },
