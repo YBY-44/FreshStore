@@ -8,7 +8,7 @@ import { CategoryListComp } from '@/_componments/CategoryListComp';
 import { useSearch } from '../../_context/SearchContext';
 
 export default function Home() {
-  const curPage = 'Milk & Juice';
+  const curPage = 'MilkJuice';
   const { search } = useSearch();
   const [ProductList, setProductList] = useState<ProductType[]>([]);
   const [CategoryList, setCategoryList] = useState<Category[]>([]);
