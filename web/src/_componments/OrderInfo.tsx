@@ -192,7 +192,7 @@ export const OrderInfo = ({
             {...register('postCode')}
           />
         </div>
-        <div className='flex gap-2 items-center'>
+        <div className='flex gap-2 items-left flex-col w-full'>
           <InputComponment
             label='Delivery Time'
             type='date' // 更正 type 属性
